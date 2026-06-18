@@ -1,0 +1,10 @@
+[
+  { "id": "boar", "name": "野猪", "color": "#8B4513" },
+  { "id": "roe_deer", "name": "狍子", "color": "#D2691E" },
+  { "id": "sika_deer", "name": "梅花鹿", "color": "#DAA520" },
+  { "id": "hare", "name": "野兔", "color": "#A0522D" },
+  { "id": "fox", "name": "狐狸", "color": "#CD853F" },
+  { "id": "bird", "name": "鸟类", "color": "#4682B4" },
+  { "id": "empty", "name": "空拍", "color": "#708090" },
+  { "id": "unknown", "name": "未知", "color": "#696969" }
+]

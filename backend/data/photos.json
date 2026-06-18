@@ -1,0 +1,121 @@
+[
+  {
+    "id": "P001",
+    "cameraId": "CAM001",
+    "timestamp": "2024-05-10T03:24:15Z",
+    "url": "https://images.unsplash.com/photo-1597852074816-d933c7d2b988?w=600&h=400&fit=crop",
+    "tags": [
+      "boar"
+    ],
+    "notes": "夜间拍摄，野猪群3只"
+  },
+  {
+    "id": "P002",
+    "cameraId": "CAM002",
+    "timestamp": "2024-05-12T14:08:33Z",
+    "url": "https://images.unsplash.com/photo-1501707305551-9b2adda5e527?w=600&h=400&fit=crop",
+    "tags": [
+      "roe_deer"
+    ],
+    "notes": "白天饮水"
+  },
+  {
+    "id": "P003",
+    "cameraId": "CAM003",
+    "timestamp": "2024-05-15T06:45:22Z",
+    "url": "https://images.unsplash.com/photo-1567372385578-9244e58415e4?w=600&h=400&fit=crop",
+    "tags": [
+      "sika_deer"
+    ],
+    "notes": "清晨鹿道"
+  },
+  {
+    "id": "P004",
+    "cameraId": "CAM001",
+    "timestamp": "2024-05-18T22:11:05Z",
+    "url": "https://images.unsplash.com/photo-1543584756-8f40a802e14f?w=600&h=400&fit=crop",
+    "tags": [
+      "boar",
+      "unknown"
+    ],
+    "notes": "夜间野猪，背景有疑似其他动物"
+  },
+  {
+    "id": "P005",
+    "cameraId": "CAM002",
+    "timestamp": "2024-05-20T11:33:48Z",
+    "url": "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=600&h=400&fit=crop",
+    "tags": [
+      "fox"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "P006",
+    "cameraId": "CAM003",
+    "timestamp": "2024-05-22T17:55:10Z",
+    "url": "https://images.unsplash.com/photo-1568402102990-bc541580b59f?w=600&h=400&fit=crop",
+    "tags": [
+      "sika_deer"
+    ],
+    "notes": "母鹿带幼崽"
+  },
+  {
+    "id": "P007",
+    "cameraId": "CAM001",
+    "timestamp": "2024-05-25T09:22:37Z",
+    "url": "https://images.unsplash.com/photo-1521651201144-634f700b36ef?w=600&h=400&fit=crop",
+    "tags": [
+      "bird"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "P008",
+    "cameraId": "CAM002",
+    "timestamp": "2024-05-28T04:17:02Z",
+    "url": "https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?w=600&h=400&fit=crop",
+    "tags": [
+      "hare"
+    ],
+    "notes": "黎明时分"
+  },
+  {
+    "id": "P009",
+    "cameraId": "CAM003",
+    "timestamp": "2024-06-01T20:48:29Z",
+    "url": "https://images.unsplash.com/photo-1591824438708-ce405f36ba3d?w=600&h=400&fit=crop",
+    "tags": [
+      "empty"
+    ],
+    "notes": "风吹动草木触发"
+  },
+  {
+    "id": "P010",
+    "cameraId": "CAM001",
+    "timestamp": "2024-06-05T15:30:55Z",
+    "url": "https://images.unsplash.com/photo-1543584756-8f40a802e14f?w=600&h=400&fit=crop",
+    "tags": [
+      "boar"
+    ],
+    "notes": "午后觅食"
+  },
+  {
+    "id": "P011",
+    "cameraId": "CAM002",
+    "timestamp": "2024-06-08T12:05:18Z",
+    "url": "https://images.unsplash.com/photo-1501707305551-9b2adda5e527?w=600&h=400&fit=crop",
+    "tags": [
+      "roe_deer"
+    ],
+    "notes": ""
+  },
+  {
+    "id": "P012",
+    "cameraId": "CAM003",
+    "timestamp": "2024-06-12T07:40:44Z",
+    "url": "https://images.unsplash.com/photo-1567372385578-9244e58415e4?w=600&h=400&fit=crop",
+    "tags": [],
+    "notes": ""
+  }
+]

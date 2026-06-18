@@ -1,0 +1,23 @@
+[
+  {
+    "id": "CAM001",
+    "name": "一号监测点",
+    "location": "东坡林区海拔800米处",
+    "description": "主要监测野猪活动区域",
+    "installedDate": "2024-03-15"
+  },
+  {
+    "id": "CAM002",
+    "name": "二号监测点",
+    "location": "西坡溪流旁",
+    "description": "靠近水源，多种动物出没",
+    "installedDate": "2024-04-02"
+  },
+  {
+    "id": "CAM003",
+    "name": "三号监测点",
+    "location": "北坡山脊鹿道",
+    "description": "梅花鹿常经过的路径",
+    "installedDate": "2024-04-20"
+  }
+]
