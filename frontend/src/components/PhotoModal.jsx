@@ -10,19 +10,35 @@ function formatDate(ts) {
 export default function PhotoModal({ photoId, tags, cameras, onClose, onUpdateTags }) {
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [imgError, setImgError] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [notes, setNotes] = useState('');
   const [saveStatus, setSaveStatus] = useState('');
 
   useEffect(() => {
+    if (!photoId) {
+      setLoading(false);
+      setError('照片编号缺失');
+      return;
+    }
     setLoading(true);
+    setError(null);
+    setPhoto(null);
+    setImgError(false);
     getPhotoDetail(photoId)
       .then(data => {
+        if (!data) {
+          throw new Error('照片数据为空');
+        }
         setPhoto(data);
-        setSelectedTags(data.tags || []);
-        setNotes(data.notes || '');
+        setSelectedTags(Array.isArray(data.tags) ? data.tags : []);
+        setNotes(typeof data.notes === 'string' ? data.notes : '');
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        console.error('加载照片详情失败:', err);
+        setError(err.message || '加载照片详情失败');
+      })
       .finally(() => setLoading(false));
   }, [photoId]);
 
@@ -51,11 +67,38 @@ export default function PhotoModal({ photoId, tags, cameras, onClose, onUpdateTa
     }
   };
 
-  if (loading || !photo) {
+  const photoUrl = photo && photo.url && !imgError ? photo.url : null;
+
+  if (loading) {
     return (
       <div className="modal-overlay" onClick={onClose}>
+        <button className="modal-close" onClick={onClose}>×</button>
         <div className="modal-content" onClick={e => e.stopPropagation()}>
-          <div className="loading" style={{ width: '100%' }}>加载中...</div>
+          <div className="loading" style={{ width: '100%' }}>
+            <div style={{ fontSize: 40, marginBottom: 12 }}>⏳</div>
+            正在加载照片详情...
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="modal-overlay" onClick={onClose}>
+        <button className="modal-close" onClick={onClose}>×</button>
+        <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <div className="empty-state" style={{ width: '100%' }}>
+            <div style={{ fontSize: 48, marginBottom: 12 }}>⚠️</div>
+            <div style={{ fontSize: 16, marginBottom: 6 }}>加载失败</div>
+            <div style={{ fontSize: 13, color: '#e74c3c' }}>{error}</div>
+            <button
+              onClick={onClose}
+              style={{ marginTop: 20, padding: '8px 20px', background: '#3498db', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer' }}
+            >
+              关闭
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -66,7 +109,18 @@ export default function PhotoModal({ photoId, tags, cameras, onClose, onUpdateTa
       <button className="modal-close" onClick={onClose}>×</button>
       <div className="modal-content" onClick={e => e.stopPropagation()}>
         <div className="modal-image-wrapper">
-          <img src={photo.url} alt={photo.id} />
+          {photoUrl ? (
+            <img
+              src={photoUrl}
+              alt={photo.id || '照片'}
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div style={{ color: '#95a5a6', textAlign: 'center', padding: 40 }}>
+              <div style={{ fontSize: 60, marginBottom: 12 }}>🖼️</div>
+              <div>{imgError ? '图片加载失败' : '暂无图片'}</div>
+            </div>
+          )}
         </div>
         <div className="modal-sidebar">
           <div className="info-row">
