@@ -69,6 +69,11 @@ app.put('/api/photos/:id/tags', (req, res) => {
   res.json(photo);
 });
 
+app.get('/api/stats/time-slots', (req, res) => {
+  const { cameraId } = req.query;
+  res.json(store.getPhotoStatsByTimeSlot(cameraId));
+});
+
 app.listen(PORT, () => {
   console.log(`野生动物照片管理系统后端服务已启动: http://localhost:${PORT}`);
   console.log(`API 根路径: http://localhost:${PORT}/api`);

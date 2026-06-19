@@ -47,3 +47,8 @@ export function deleteCamera(id) {
     method: 'DELETE'
   });
 }
+
+export function getStatsByTimeSlot(cameraId) {
+  const query = cameraId ? `?cameraId=${encodeURIComponent(cameraId)}` : '';
+  return request(`/stats/time-slots${query}`);
+}

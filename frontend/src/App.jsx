@@ -3,6 +3,7 @@ import { getCameras, getTags, getPhotos, updatePhotoTags } from './api';
 import Sidebar from './components/Sidebar.jsx';
 import PhotoGrid from './components/PhotoGrid.jsx';
 import PhotoModal from './components/PhotoModal.jsx';
+import TimeSlotChart from './components/TimeSlotChart.jsx';
 
 export default function App() {
   const [cameras, setCameras] = useState([]);
@@ -74,6 +75,11 @@ export default function App() {
     cameraCount: new Set(allPhotos.map(p => p.cameraId)).size
   }), [allPhotos]);
 
+  const selectedCameraObj = useMemo(() => {
+    if (!selectedCamera) return null;
+    return cameras.find(c => c.id === selectedCamera) || null;
+  }, [selectedCamera, cameras]);
+
   const handleUpdateTags = async (id, newTags, notes) => {
     const updated = await updatePhotoTags(id, newTags, notes);
     setAllPhotos(prev => prev.map(p => (p.id === id ? { ...p, ...updated } : p)));
@@ -103,6 +109,12 @@ export default function App() {
           </div>
         </div>
         <div className="photo-grid-container">
+          {selectedCamera && selectedCameraObj && (
+            <TimeSlotChart
+              cameraId={selectedCamera}
+              cameraName={selectedCameraObj.name}
+            />
+          )}
           {loading ? (
             <div className="loading">加载中...</div>
           ) : (

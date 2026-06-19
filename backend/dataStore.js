@@ -82,6 +82,87 @@ function deleteCamera(id) {
   return true;
 }
 
+function getTimeSlot(hour) {
+  if (hour >= 0 && hour < 6) return 'dawn';
+  if (hour >= 6 && hour < 12) return 'morning';
+  if (hour >= 12 && hour < 18) return 'afternoon';
+  return 'night';
+}
+
+function getPhotoStatsByTimeSlot(cameraId) {
+  const photos = readJSON('photos.json');
+  const tags = readJSON('tags.json');
+
+  const filtered = cameraId
+    ? photos.filter(p => p.cameraId === cameraId)
+    : photos;
+
+  const timeSlots = {
+    dawn: { label: '凌晨 (00:00-06:00)', startHour: 0 },
+    morning: { label: '上午 (06:00-12:00)', startHour: 6 },
+    afternoon: { label: '下午 (12:00-18:00)', startHour: 12 },
+    night: { label: '夜间 (18:00-24:00)', startHour: 18 }
+  };
+
+  const stats = {};
+  Object.keys(timeSlots).forEach(slot => {
+    stats[slot] = {
+      slotKey: slot,
+      label: timeSlots[slot].label,
+      total: 0,
+      byTag: {}
+    };
+    tags.forEach(tag => {
+      stats[slot].byTag[tag.id] = { tag, count: 0 };
+    });
+  });
+
+  filtered.forEach(photo => {
+    const d = new Date(photo.timestamp);
+    const slot = getTimeSlot(d.getHours());
+    if (!stats[slot]) return;
+
+    stats[slot].total += 1;
+
+    if (photo.tags && photo.tags.length > 0) {
+      photo.tags.forEach(tagId => {
+        if (stats[slot].byTag[tagId]) {
+          stats[slot].byTag[tagId].count += 1;
+        }
+      });
+    }
+  });
+
+  const timeSlotOrder = ['dawn', 'morning', 'afternoon', 'night'];
+  const result = timeSlotOrder.map(slot => ({
+    slotKey: stats[slot].slotKey,
+    label: stats[slot].label,
+    total: stats[slot].total,
+    byTag: Object.values(stats[slot].byTag)
+  }));
+
+  const tagSummary = {};
+  tags.forEach(tag => {
+    tagSummary[tag.id] = { tag, count: 0 };
+  });
+  filtered.forEach(photo => {
+    if (photo.tags) {
+      photo.tags.forEach(tagId => {
+        if (tagSummary[tagId]) {
+          tagSummary[tagId].count += 1;
+        }
+      });
+    }
+  });
+
+  return {
+    cameraId: cameraId || null,
+    totalPhotos: filtered.length,
+    timeSlots: result,
+    tagSummary: Object.values(tagSummary).filter(t => t.count > 0)
+  };
+}
+
 module.exports = {
   getCameras,
   getCameraById,
@@ -90,5 +171,6 @@ module.exports = {
   getPhotoById,
   updatePhotoTags,
   addCamera,
-  deleteCamera
+  deleteCamera,
+  getPhotoStatsByTimeSlot
 };
